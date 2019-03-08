@@ -12,6 +12,17 @@ const appointmentsController = {
     Appointment.create(req.body).then(appt => {
       res.send(appt)
     })
+  },
+  edit: (req, res) => {
+    Appointment.findById(req.params.id).populate('person').then(appt => {
+      res.send(appt)
+    })
+  },
+  update: (req, res) => {
+    Appointment.findByIdAndUpdate(req.params.id, req.body).then(appt => {
+      appt.save()
+      res.send(appt)
+    })
   }
 }
 module.exports = appointmentsController;
