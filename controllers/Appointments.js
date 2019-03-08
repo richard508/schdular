@@ -25,4 +25,4 @@ const appointmentsController = {
     })
   }
 }
-module.exports = appointmentsController;
+module.exports = appointmentsController
