@@ -4,7 +4,7 @@ const scheduleReducer = (state = initState, action) =>{
     case 'GET_APPT':
       console.log(action)
       return {
-        appointments: [...state.appointments, action.survey]
+        appointments: action.data
       }
     case 'ERROR_APPT':
       console.log('Error getting appointments')
