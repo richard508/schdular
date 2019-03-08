@@ -8,15 +8,30 @@ class Scheduler extends Component {
   }
   render() {
     return (
-      <div>
-        Scheduler Component
+      <div className="appointment_card">
+        {this.props.appointments && this.props.appointments.map((appointment, i) => (
+          <div
+            className="time_list"
+            onClick={() => this.openTime(appointment._id)}
+            key={i}
+          >
+            {appointment.isAvailable === true ? (
+              appointment.time
+            ) : (
+              <div style={{backgroundColor: 'red'}}>{appointment.time}</div>
+            )}
+          </div>
+        ))}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
-  return state;
+  console.log(state)
+  return{
+    appointments: state.appt.appointments
+  } 
 }
 
 const mapDispatchToProps = dispatch => {

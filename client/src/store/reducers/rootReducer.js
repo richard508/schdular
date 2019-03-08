@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
 import scheduleReducer from './scheduleReducer'
 const rootReducer = combineReducers({
-  scheduleReducer
+  appt: scheduleReducer
 })
 export default rootReducer
 

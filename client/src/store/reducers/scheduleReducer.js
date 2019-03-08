@@ -1,8 +1,9 @@
-const initState = {}
+const initState = {
+  appointments: null
+}
 const scheduleReducer = (state = initState, action) =>{
   switch(action.type){
     case 'GET_APPT':
-      console.log(action)
       return {
         appointments: action.data
       }
