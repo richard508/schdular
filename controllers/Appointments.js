@@ -7,6 +7,11 @@ const appointmentsController = {
     .then(data => {
       res.json(data)
     })
+  },
+  create: (req, res) => {
+    Appointment.create(req.body).then(appt => {
+      res.send(appt)
+    })
   }
 }
 module.exports = appointmentsController;
