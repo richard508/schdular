@@ -6,6 +6,10 @@ class Scheduler extends Component {
   componentDidMount(){
     this.props.getPeople()
   }
+
+  openTime = (id) =>{
+    console.log(id)
+  }
   render() {
     return (
       <div className="appointment_card">
