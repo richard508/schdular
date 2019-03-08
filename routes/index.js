@@ -12,5 +12,5 @@ router.get('/api/appointments/:id', appointmentsController.edit)
 router.patch('/api/appointments/:id', appointmentsController.update)
 
 //people routes
-router.post('/api/peoplw', peopleController.create)
+router.post('/api/people', peopleController.create)
 module.exports = router
