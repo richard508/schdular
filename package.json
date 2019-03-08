@@ -1,0 +1,11 @@
+{
+  "name": "schedular",
+  "version": "1.0.0",
+  "description": "build a scheular",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Richard Almonte",
+  "license": "ISC"
+}
