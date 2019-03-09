@@ -41,7 +41,7 @@
 
 .time_font {
   color: navy;
-  font: 500 16px/9vh Arial;
+  font: bold 16px/9vh Arial;
 }
 
 .time {
@@ -49,5 +49,6 @@
 }
 
 .taken_time{
+  color: white;
   background-color: red;
 }
