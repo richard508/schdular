@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import {getPeople} from "../store/actions/scheduleActions"
-import BootModal from './Modal';
+import BootModal from './Modal'
 
 class Scheduler extends Component {
   state = {
