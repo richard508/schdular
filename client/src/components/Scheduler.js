@@ -22,7 +22,7 @@ class Scheduler extends Component {
             {appointment.isAvailable === true ? (
               appointment.time
             ) : (
-              <div className="taken_time">{appointment.time}</div>
+              <div className="time taken_time">{appointment.time}</div>
             )}
           </div>
         ))}

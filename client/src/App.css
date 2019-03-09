@@ -48,7 +48,15 @@
   border: 1px lightblue solid;
 }
 
+.time:hover {
+  background-color: #eee;
+}
+
 .taken_time{
   color: white;
   background-color: red;
+}
+
+.taken_time:hover {
+  background-color: #f66;
 }
