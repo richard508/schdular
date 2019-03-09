@@ -36,7 +36,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPeople: () => dispatch(getPeople())
-  };
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Scheduler)
