@@ -6,15 +6,37 @@ import BootModal from './Modal'
 class Scheduler extends Component {
   state = {
     openModal: false,
+    id: '',
+    currentAppt: Object
   }
   componentDidMount(){
     this.props.getPeople()
   }
 
   openTime = (id) =>{
+    const appt = this.props.appointments.find(appt => {
+      return appt._id === id
+    })
+    this.setState({
+      openModal: true,
+      id,
+      currentAppt: appt
+    })
+  }
+
+  toggle = () =>{
     this.setState(prevState => ({
       openModal: !prevState.openModal
     }))
+  }
+
+  handleSubmit = (payload) => {
+    console.log(payload)
+    this.setState({
+      openModal: false,
+      id:'',
+      currentAppt: {}
+    })
   }
 
   render() {
@@ -30,7 +52,12 @@ class Scheduler extends Component {
               {appointment.time}
             </div>
           ))}
-        <BootModal show={this.state.openModal} onHide={this.openTime}/>
+        <BootModal 
+          show={this.state.openModal} 
+          onHide={this.toggle} 
+          currentAppt={this.state.currentAppt}
+          handleSubmit={this.handleSubmit}
+        />
         </div>
       </div>
     )
