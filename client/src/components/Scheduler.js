@@ -7,7 +7,10 @@ class Scheduler extends Component {
   state = {
     openModal: false,
     id: '',
-    currentAppt: Object
+    currentAppt: Object,
+    first_name: '',
+    last_name: '',
+    phone: ''
   }
   componentDidMount(){
     this.props.getPeople()
@@ -20,7 +23,9 @@ class Scheduler extends Component {
     this.setState({
       openModal: true,
       id,
-      currentAppt: appt
+      first_name: appt.person.first_name,
+      last_name: appt.person.last_name,
+      phone: appt.person.phone
     })
   }
 
@@ -30,12 +35,23 @@ class Scheduler extends Component {
     }))
   }
 
-  handleSubmit = (payload) => {
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = () => {
+    const payload = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      phone: this.state.phone
+    }
     console.log(payload)
     this.setState({
       openModal: false,
       id:'',
-      currentAppt: {}
+      currentAppt: Object
     })
   }
 
@@ -57,6 +73,10 @@ class Scheduler extends Component {
           onHide={this.toggle} 
           currentAppt={this.state.currentAppt}
           handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          first_name={this.state.first_name}
+          last_name={this.state.last_name}
+          phone={this.state.phone}
         />
         </div>
       </div>

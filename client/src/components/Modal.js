@@ -3,29 +3,13 @@ import { Modal, Button, Form, FormGroup} from 'react-bootstrap'
 import  {Input, Col, Row, Label} from 'reactstrap'
 
 class BootModal extends Component {
-  state={
-    first_name: "",
-    last_name: "",
-    phone: Number
-  }
-
   handleSubmit = (e) =>{
     e.preventDefault()
-    console.log(e)
-    const payload = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      phone: this.state.phone
-    }
-    this.props.handleSubmit(payload)
+    this.props.handleSubmit()
   }
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+
   render() {
-    const currentAppt = this.props.currentAppt
+    const {first_name, last_name, phone} = this.props
     return (
       <Modal
         show={this.props.show}
@@ -47,9 +31,8 @@ class BootModal extends Component {
                   <Input
                     type="text"
                     name="first_name"
-                    placeholder="Enter First Name"
-                    value={currentAppt.person ? currentAppt.person.first_name : ''}
-                    onChange={this.state.handleChange}
+                    value={first_name ? first_name : ''}
+                    onChange={this.props.handleChange}
                     required
                   />
                   </FormGroup>
@@ -60,9 +43,9 @@ class BootModal extends Component {
                     <Input
                       type="text"
                       name="last_name"
-                      value={currentAppt.person ? currentAppt.person.last_name : ''}
+                      value={last_name ? last_name : ''}
                       placeholder="Enter Last Name"
-                      onChange={this.state.handleChange}
+                      onChange={this.props.handleChange}
                       required
                     />
                   </FormGroup>
@@ -75,8 +58,8 @@ class BootModal extends Component {
                   type="tel"
                   pattern="^[0-9-+s()]*$"
                   name="phone"
-                  defaultValue={currentAppt.person ? currentAppt.person.phone : ''}
-                  onChange={this.state.handleChange}
+                  defaultValue={phone ? phone : ''}
+                  onChange={this.props.handleChange}
                   placeholder="Enter Phone Number"
                   required
                 />
