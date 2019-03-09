@@ -31,6 +31,7 @@ class BootModal extends Component {
                   <Input
                     type="text"
                     name="first_name"
+                    placeholder="Enter First Name"
                     value={first_name ? first_name : ''}
                     onChange={this.props.handleChange}
                     required

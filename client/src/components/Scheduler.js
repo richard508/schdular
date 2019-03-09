@@ -23,9 +23,9 @@ class Scheduler extends Component {
     this.setState({
       openModal: true,
       id,
-      first_name: appt.person.first_name,
-      last_name: appt.person.last_name,
-      phone: appt.person.phone
+      first_name: appt.person ? appt.person.first_name : '',
+      last_name: appt.person ? appt.person.last_name : '',
+      phone: appt.person ? appt.person.phone : ''
     })
   }
 
