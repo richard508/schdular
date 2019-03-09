@@ -31,3 +31,23 @@
     transform: rotate(360deg);
   }
 }
+
+.appointment_times {
+  margin: 0 auto;
+  width: 50%;
+  border: 2px lightblue solid;
+  cursor: pointer;
+}
+
+.time_font {
+  color: navy;
+  font: 500 16px/9vh Arial;
+}
+
+.time {
+  border: 1px lightblue solid;
+}
+
+.taken_time{
+  background-color: red;
+}
