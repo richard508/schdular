@@ -15,15 +15,11 @@ class Scheduler extends Component {
       <div className="appointment_times time_font">
         {this.props.appointments && this.props.appointments.map((appointment, i) => (
           <div
-            className="time"
+            className={appointment.isAvailable === true ? 'time' : 'time taken_time'}
             onClick={() => this.openTime(appointment._id)}
             key={i}
           >
-            {appointment.isAvailable === true ? (
-              appointment.time
-            ) : (
-              <div className="time taken_time">{appointment.time}</div>
-            )}
+            {appointment.time}
           </div>
         ))}
       </div>
