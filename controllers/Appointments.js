@@ -19,7 +19,7 @@ const appointmentsController = {
     })
   },
   update: (req, res) => {
-    Appointment.findOneAndUpdate({_id: req.params.id}, req.body).then(appt => {
+    Appointment.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}).then(appt => {
       appt.save()
       res.send(appt)
     })
