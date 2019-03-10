@@ -9,7 +9,8 @@ class Scheduler extends Component {
     id: '',
     first_name: '',
     last_name: '',
-    phone: ''
+    phone: '',
+    isAvailable: Boolean
   }
   componentDidMount(){
     this.props.getPeople()
@@ -24,7 +25,8 @@ class Scheduler extends Component {
       id,
       first_name: appt.person ? appt.person.first_name : '',
       last_name: appt.person ? appt.person.last_name : '',
-      phone: appt.person ? appt.person.phone : ''
+      phone: appt.person ? appt.person.phone : '',
+      isAvailable: appt.isAvailable
     })
   }
 
@@ -90,6 +92,7 @@ class Scheduler extends Component {
           first_name={this.state.first_name}
           last_name={this.state.last_name}
           phone={this.state.phone}
+          isAvailable={this.state.isAvailable}
         />
         </div>
       </div>

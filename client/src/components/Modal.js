@@ -9,7 +9,7 @@ class BootModal extends Component {
   }
 
   render() {
-    const {first_name, last_name, phone} = this.props
+    const {first_name, last_name, phone, isAvailable} = this.props
     return (
       <Modal
         show={this.props.show}
@@ -65,9 +65,9 @@ class BootModal extends Component {
                   required
                 />
               </FormGroup>
-              {first_name 
-                ? <Button onClick={this.props.handleUpdate} color="primary">Update</Button>
-                : <Button type="submit" color="primary">Submit</Button>
+              {isAvailable 
+                ? <Button type="submit" color="primary">Submit</Button>
+                : <Button onClick={this.props.handleUpdate} color="primary">Update</Button>
               }
               
           </Form>
