@@ -7,9 +7,7 @@ class Scheduler extends Component {
   state = {
     openModal: false,
     id: '',
-    first_name: '',
-    last_name: '',
-    phone: '',
+    currentAppt: Object,
     isAvailable: Boolean
   }
   componentDidMount(){
@@ -23,9 +21,7 @@ class Scheduler extends Component {
     this.setState({
       openModal: true,
       id,
-      first_name: appt.person ? appt.person.first_name : '',
-      last_name: appt.person ? appt.person.last_name : '',
-      phone: appt.person ? appt.person.phone : '',
+      currentAppt: appt.person ? appt.person : Object,
       isAvailable: appt.isAvailable
     })
   }
@@ -38,7 +34,10 @@ class Scheduler extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      currentAppt:{
+        ...this.state.currentAppt,
+        [e.target.name]: e.target.value
+      }
     })
   }
 
@@ -47,22 +46,15 @@ class Scheduler extends Component {
       return appt._id === this.state.id
     })
     const personID = appt.person._id
-    const payload = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      phone: this.state.phone
-    }
+    const payload = this.state.currentAppt
     this.props.updatePerson(personID, payload)
     this.setState({openModal: false})
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
     const id = this.state.id
-    const payload = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      phone: this.state.phone
-    }
+    const payload = this.state.currentAppt
     this.props.updateAppt(id, payload)
     this.setState({
       openModal: false,
@@ -89,10 +81,8 @@ class Scheduler extends Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           handleUpdate={this.handleUpdate}
-          first_name={this.state.first_name}
-          last_name={this.state.last_name}
-          phone={this.state.phone}
           isAvailable={this.state.isAvailable}
+          currentAppt={this.state.currentAppt}
         />
         </div>
       </div>
