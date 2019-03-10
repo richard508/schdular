@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import {getPeople} from "../store/actions/scheduleActions"
+import {getPeople, updateAppt} from "../store/actions/scheduleActions"
 import BootModal from './Modal'
 
 class Scheduler extends Component {
@@ -42,12 +42,13 @@ class Scheduler extends Component {
   }
 
   handleSubmit = () => {
+    const id = this.state.id
     const payload = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       phone: this.state.phone
     }
-    console.log(payload)
+    this.props.updateAppt(id, payload)
     this.setState({
       openModal: false,
       id:'',
@@ -92,7 +93,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPeople: () => dispatch(getPeople())
+    getPeople: () => dispatch(getPeople()),
+    updateAppt: (id, payload) => dispatch(updateAppt(id, payload))
   }
 }
 
