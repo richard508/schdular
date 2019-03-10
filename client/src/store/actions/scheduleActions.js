@@ -27,13 +27,14 @@ export const updatePerson = (id, payload) => {
 export const updateAppt = (id, payload) => {
   return (dispatch) => {
     axios.post(`api/people`, payload).then(res => {
-      const personPayload = {
+      const updateAppt = {
         person: res.data._id,
         isAvailable: false
       }
-      axios.patch(`/api/appointments/${id}`, personPayload).then(res => {
+      const personPayload = res.data
+      axios.patch(`/api/appointments/${id}`, updateAppt).then(res => {
         const data = res.data
-        dispatch({type: 'UPDATE_APPT',data})
+        dispatch({type: 'UPDATE_APPT',data, personPayload})
       })
       .catch(error => {
         dispatch({type: 'ERROR_APPT', error})

@@ -2,10 +2,10 @@ const initState = {
   appointments: null
 }
 
-function updateAppt (appointments, data) {
+function updateAppt (appointments, appt, person) {
   const newAppt = appointments.map(appointment => (
-    appointment._id === data._id 
-    ? {...appointment, isAvailable: false} 
+    appointment._id === appt._id 
+    ? {...appointment, isAvailable: false, person: person} 
     : appointment))
     return newAppt
 }
@@ -29,7 +29,7 @@ const scheduleReducer = (state = initState, action) =>{
     case 'UPDATE_APPT':
       return {
         ...state,
-        appointments: [...updateAppt(state.appointments, action.data)]
+        appointments: [...updateAppt(state.appointments, action.data, action.personPayload)]
       }
     case 'UPDATE_PERSON':
       return {
