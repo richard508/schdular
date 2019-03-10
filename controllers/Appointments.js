@@ -14,12 +14,12 @@ const appointmentsController = {
     })
   },
   edit: (req, res) => {
-    Appointment.findById(req.params.id).populate('person').then(appt => {
+    Appointment.findOne({_id: req.params.id}).populate('person').then(appt => {
       res.send(appt)
     })
   },
   update: (req, res) => {
-    Appointment.findByIdAndUpdate(req.params.id, req.body).then(appt => {
+    Appointment.findOneAndUpdate({_id: req.params.id}, req.body).then(appt => {
       appt.save()
       res.send(appt)
     })
