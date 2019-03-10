@@ -12,6 +12,15 @@ export const getPeople = () => {
   }
 }
 
+export const updatePerson = (id, payload) => {
+  return (dispatch) => {
+    axios.patch(`api/people/${id}`, payload).then(res => {
+      const data = res.data
+      dispatch({type: 'UPDATE_PERSON', data})
+    })
+  }
+}
+
 export const updateAppt = (id, payload) => {
   return (dispatch) => {
     axios.post(`api/people`, payload).then(res => {
