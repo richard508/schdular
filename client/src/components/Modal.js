@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Modal, Button, Form, FormGroup} from 'react-bootstrap'
 import  {Input, Col, Row, Label} from 'reactstrap'
 
-class BootModal extends Component {
-  handleSubmit = (e) =>{
-    e.preventDefault()
-    this.props.handleSubmit()
-  }
-
-  render() {
-    const {first_name, last_name, phone, isAvailable} = this.props
+const BootModal = (props) => {
+    const {isAvailable, currentAppt} = props
     return (
       <Modal
-        show={this.props.show}
+        show={props.show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -23,7 +17,7 @@ class BootModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={props.handleSubmit}>
             <Row>
               <Col md={6}>
                 <FormGroup>
@@ -32,8 +26,8 @@ class BootModal extends Component {
                     type="text"
                     name="first_name"
                     placeholder="Enter First Name"
-                    value={first_name ? first_name : ''}
-                    onChange={this.props.handleChange}
+                    value={currentAppt.first_name || ''}
+                    onChange={props.handleChange}
                     required
                   />
                   </FormGroup>
@@ -44,9 +38,9 @@ class BootModal extends Component {
                     <Input
                       type="text"
                       name="last_name"
-                      value={last_name ? last_name : ''}
+                      value={currentAppt.last_name || ''}
                       placeholder="Enter Last Name"
-                      onChange={this.props.handleChange}
+                      onChange={props.handleChange}
                       required
                     />
                   </FormGroup>
@@ -59,25 +53,24 @@ class BootModal extends Component {
                   type="tel"
                   pattern="^[0-9-+s()]*$"
                   name="phone"
-                  defaultValue={phone ? phone : ''}
-                  onChange={this.props.handleChange}
+                  value={currentAppt.phone || ''}
+                  onChange={props.handleChange}
                   placeholder="Enter Phone Number"
                   required
                 />
               </FormGroup>
               {isAvailable 
                 ? <Button type="submit" color="primary">Submit</Button>
-                : <Button onClick={this.props.handleUpdate} color="primary">Update</Button>
+                : <Button onClick={props.handleUpdate} color="primary">Update</Button>
               }
               
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     )
-  }
 }
 
 export default BootModal
