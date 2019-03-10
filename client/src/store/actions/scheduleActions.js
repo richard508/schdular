@@ -18,6 +18,9 @@ export const updatePerson = (id, payload) => {
       const data = res.data
       dispatch({type: 'UPDATE_PERSON', data})
     })
+    .catch(err =>{
+      console.log('Failed to update person')
+    })
   }
 }
 
