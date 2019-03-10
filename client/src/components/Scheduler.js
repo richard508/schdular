@@ -51,6 +51,7 @@ class Scheduler extends Component {
       phone: this.state.phone
     }
     this.props.updatePerson(personID, payload)
+    this.setState({openModal: false})
   }
 
   handleSubmit = () => {
@@ -63,8 +64,7 @@ class Scheduler extends Component {
     this.props.updateAppt(id, payload)
     this.setState({
       openModal: false,
-      id:'',
-      currentAppt: Object
+      id:''
     })
   }
 
