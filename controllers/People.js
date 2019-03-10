@@ -7,12 +7,12 @@ const peopleController = {
     })
   },
   edit: (req, res) => {
-    person.findOne({_id: req.params.id}).then(person => {
+    Person.findOne({_id: req.params.id}).then(person => {
       res.send(person)
     })
   },
   update: (req, res) => {
-    person.findOneAndUpdate({_id: req.params.id}, req.body).then(person => {
+    Person.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}).then(person => {
       person.save()
       res.send(person)
     })
