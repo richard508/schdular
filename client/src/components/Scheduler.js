@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import {getPeople, updateAppt} from "../store/actions/scheduleActions"
+import {getPeople, updateAppt, updatePerson} from "../store/actions/scheduleActions"
 import BootModal from './Modal'
 
 class Scheduler extends Component {
   state = {
     openModal: false,
     id: '',
-    currentAppt: Object,
     first_name: '',
     last_name: '',
     phone: ''
@@ -41,6 +40,19 @@ class Scheduler extends Component {
     })
   }
 
+  handleUpdate = () => {
+    const appt = this.props.appointments.find(appt => {
+      return appt._id === this.state.id
+    })
+    const personID = appt.person._id
+    const payload = {
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
+      phone: this.state.phone
+    }
+    this.props.updatePerson(personID, payload)
+  }
+
   handleSubmit = () => {
     const id = this.state.id
     const payload = {
@@ -72,9 +84,9 @@ class Scheduler extends Component {
         <BootModal 
           show={this.state.openModal} 
           onHide={this.toggle} 
-          currentAppt={this.state.currentAppt}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          handleUpdate={this.handleUpdate}
           first_name={this.state.first_name}
           last_name={this.state.last_name}
           phone={this.state.phone}
@@ -94,7 +106,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPeople: () => dispatch(getPeople()),
-    updateAppt: (id, payload) => dispatch(updateAppt(id, payload))
+    updateAppt: (id, payload) => dispatch(updateAppt(id, payload)),
+    updatePerson: (id, payload) => dispatch(updatePerson(id, payload))
   }
 }
 

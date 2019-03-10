@@ -65,7 +65,11 @@ class BootModal extends Component {
                   required
                 />
               </FormGroup>
-              <Button type="submit" color="primary">Submit</Button>
+              {first_name 
+                ? <Button onClick={this.props.handleUpdate} color="primary">Update</Button>
+                : <Button type="submit" color="primary">Submit</Button>
+              }
+              
           </Form>
         </Modal.Body>
         <Modal.Footer>
