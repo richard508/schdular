@@ -59,10 +59,7 @@ const BootModal = (props) => {
                   required
                 />
               </FormGroup>
-              {isAvailable 
-                ? <Button type="submit" color="primary">Submit</Button>
-                : <Button onClick={props.handleUpdate} color="primary">Update</Button>
-              }
+              <Button type="submit" color="primary">{isAvailable ? 'Submit' : 'Update'}</Button>
               
           </Form>
         </Modal.Body>

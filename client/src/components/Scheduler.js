@@ -41,21 +41,18 @@ class Scheduler extends Component {
     })
   }
 
-  handleUpdate = () => {
-    const appt = this.props.appointments.find(appt => {
-      return appt._id === this.state.id
-    })
-    const personID = appt.person._id
-    const payload = this.state.currentAppt
-    this.props.updatePerson(personID, payload)
-    this.setState({openModal: false})
-  }
-
   handleSubmit = (e) => {
     e.preventDefault()
     const id = this.state.id
+    const appt = this.props.appointments.find(appt => {
+      return appt._id === id
+    })
     const payload = this.state.currentAppt
-    this.props.updateAppt(id, payload)
+    if (appt.person){
+      const personID = appt.person._id
+      this.props.updatePerson(personID, payload)
+    } else this.props.updateAppt(id, payload)
+
     this.setState({
       openModal: false,
       id:''
@@ -80,7 +77,6 @@ class Scheduler extends Component {
           onHide={this.toggle} 
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
-          handleUpdate={this.handleUpdate}
           isAvailable={this.state.isAvailable}
           currentAppt={this.state.currentAppt}
         />
