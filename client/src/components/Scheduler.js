@@ -66,6 +66,7 @@ class Scheduler extends Component {
       return appt._id === id
     })
     const pid = appt.person._id
+    delete appt.person
     appt.isAvailable = true
     this.props.cancelAppt(pid, appt)
     this.setState({
