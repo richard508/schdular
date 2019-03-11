@@ -82,9 +82,9 @@ class Scheduler extends Component {
     })
   }
 
-  timeChange = (e) => {
+  timeChange = (e, time) => {
     e.preventDefault()
-
+    console.log(time)
   }
 
   render() {

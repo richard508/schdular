@@ -1,9 +1,10 @@
 import React from 'react'
-import { Modal, Button, Form, FormGroup} from 'react-bootstrap'
+import { Modal, Button, Form, FormGroup, Dropdown} from 'react-bootstrap'
 import  {Input, Col, Row, Label} from 'reactstrap'
 
 const BootModal = (props) => {
-    const {isAvailable, currentAppt} = props
+    const {isAvailable, currentAppt, availableTimes} = props
+    console.log(availableTimes[0] ? availableTimes[0].time : '')
     return (
       <Modal
         show={props.show}
@@ -11,10 +12,25 @@ const BootModal = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+      
         <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
             Book Your Appointment
           </Modal.Title>
+          {isAvailable ? ''
+            : <Dropdown>
+                Change Time:
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {availableTimes[0].time}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {availableTimes.map(time => (
+                    <Dropdown.Item key={time._id} onClick={(e) => props.timeChange(e, time._id)}>{time.time}</Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            }
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={props.handleSubmit}>
