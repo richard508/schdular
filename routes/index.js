@@ -15,4 +15,5 @@ router.patch('/api/appointments/:id', appointmentsController.update)
 router.post('/api/people', peopleController.create)
 router.get('/api/people/:id/edit', peopleController.edit)
 router.patch('/api/people/:id', peopleController.update)
+router.delete('/api/people/:id', peopleController.delete)
 module.exports = router

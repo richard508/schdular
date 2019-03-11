@@ -16,6 +16,12 @@ const peopleController = {
       person.save()
       res.send(person)
     })
+  },
+  delete: (req, res) => {
+    Person.findByIdAndDelete(req.params.id)
+      .then(() => {
+          res.send(200)
+      })
   }
 }
 
