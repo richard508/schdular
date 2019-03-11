@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const getPeople = () => {
+export const getAppt = () => {
   return (dispatch) => {
     axios.get('/api/appointments').then(res => {
       const data = res.data

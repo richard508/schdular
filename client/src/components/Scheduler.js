@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import {getPeople, updateAppt, updatePerson, cancelAppt} from "../store/actions/scheduleActions"
+import {getAppt, updateAppt, updatePerson, cancelAppt} from "../store/actions/scheduleActions"
 import BootModal from './Modal'
 
 class Scheduler extends Component {
@@ -11,7 +11,7 @@ class Scheduler extends Component {
     isAvailable: Boolean
   }
   componentDidMount(){
-    this.props.getPeople()
+    this.props.getAppt()
   }
 
   openTime = (id) =>{
@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPeople: () => dispatch(getPeople()),
+    getAppt: () => dispatch(getAppt()),
     updateAppt: (id, payload) => dispatch(updateAppt(id, payload)),
     updatePerson: (id, payload) => dispatch(updatePerson(id, payload)),
     cancelAppt: (pid, appt) => (dispatch(cancelAppt(pid, appt)))
