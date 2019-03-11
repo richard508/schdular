@@ -59,7 +59,8 @@ const BootModal = (props) => {
                   required
                 />
               </FormGroup>
-              <Button type="submit" color="primary">{isAvailable ? 'Submit' : 'Update'}</Button>
+              <Button type="submit" style={{marginRight: '10px'}} color="primary">{isAvailable ? 'Submit' : 'Update'}</Button>
+              {isAvailable ? '' : <Button className='btn-danger' onClick={props.handleCancel}>Cancel Appointment</Button>}
               
           </Form>
         </Modal.Body>

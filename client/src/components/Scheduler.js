@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import {getPeople, updateAppt, updatePerson} from "../store/actions/scheduleActions"
+import {getPeople, updateAppt, updatePerson, cancelAppt} from "../store/actions/scheduleActions"
 import BootModal from './Modal'
 
 class Scheduler extends Component {
@@ -59,6 +59,22 @@ class Scheduler extends Component {
     })
   }
 
+  handleCancel = (e) => {
+    e.preventDefault()
+    const id = this.state.id
+    const appt = this.props.appointments.find(appt => {
+      return appt._id === id
+    })
+    const pid = appt.person._id
+    delete appt.person
+    appt.isAvailable = true
+    this.props.cancelAppt(pid, appt)
+    this.setState({
+      openModal: false,
+      id:''
+    })
+  }
+
   render() {
     return (
       <div>
@@ -79,6 +95,7 @@ class Scheduler extends Component {
           handleChange={this.handleChange}
           isAvailable={this.state.isAvailable}
           currentAppt={this.state.currentAppt}
+          handleCancel={this.handleCancel}
         />
         </div>
       </div>
@@ -96,7 +113,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getPeople: () => dispatch(getPeople()),
     updateAppt: (id, payload) => dispatch(updateAppt(id, payload)),
-    updatePerson: (id, payload) => dispatch(updatePerson(id, payload))
+    updatePerson: (id, payload) => dispatch(updatePerson(id, payload)),
+    cancelAppt: (pid, appt) => (dispatch(cancelAppt(pid, appt)))
   }
 }
 
