@@ -8,7 +8,8 @@ class Scheduler extends Component {
     openModal: false,
     id: '',
     currentAppt: Object,
-    isAvailable: Boolean
+    isAvailable: Boolean,
+    availableTimes: Array
   }
   componentDidMount(){
     this.props.getAppt()
@@ -18,11 +19,17 @@ class Scheduler extends Component {
     const appt = this.props.appointments.find(appt => {
       return appt._id === id
     })
+    const availTimes = this.props.appointments.filter(allAppt => {
+      return allAppt.isAvailable === true && allAppt._id !== appt._id
+    })
+    const availableTimes = [appt, ...availTimes]
+    
     this.setState({
       openModal: true,
       id,
       currentAppt: appt.person ? appt.person : Object,
-      isAvailable: appt.isAvailable
+      isAvailable: appt.isAvailable,
+      availableTimes
     })
   }
 
@@ -75,6 +82,11 @@ class Scheduler extends Component {
     })
   }
 
+  timeChange = (e) => {
+    e.preventDefault()
+
+  }
+
   render() {
     return (
       <div>
@@ -96,6 +108,8 @@ class Scheduler extends Component {
           isAvailable={this.state.isAvailable}
           currentAppt={this.state.currentAppt}
           handleCancel={this.handleCancel}
+          availableTimes={this.state.availableTimes}
+          timeChange={this.timeChange}
         />
         </div>
       </div>
