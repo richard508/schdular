@@ -45,3 +45,20 @@ export const updateAppt = (id, payload) => {
     })
   }
 }
+
+export const cancelAppt = (pid, appt) => {
+  return (dispatch) => {
+    axios.delete(`api/people/${pid}`).then(res => {
+      axios.patch(`/api/appointments/${appt._id}`, appt).then(res => {
+        const data = res.data
+        dispatch({type: 'CANCEL_APPT',data})
+      })
+      .catch(error => {
+        dispatch({type: 'ERROR_APPT', error})
+      })
+    })
+    .catch(error => {
+      dispatch({type: 'ERROR_PERSON', error})
+    })
+  }
+}
