@@ -4,7 +4,6 @@ import  {Input, Col, Row, Label} from 'reactstrap'
 
 const BootModal = (props) => {
     const {isAvailable, currentAppt, availableTimes} = props
-    console.log(availableTimes[0] ? availableTimes[0].time : '')
     return (
       <Modal
         show={props.show}
@@ -19,15 +18,17 @@ const BootModal = (props) => {
           </Modal.Title>
           {isAvailable ? ''
             : <Dropdown>
-                Change Time:
+                <div>Change Time: </div>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
                   {availableTimes[0].time}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {availableTimes.map(time => (
-                    <Dropdown.Item key={time._id} onClick={(e) => props.timeChange(e, time._id)}>{time.time}</Dropdown.Item>
-                  ))}
+                  {availableTimes.map(time => {
+                    if(time._id !== availableTimes[0]._id){
+                      return <Dropdown.Item key={time._id} onClick={(e) => props.timeChange(e, time)}>{time.time}</Dropdown.Item>
+                    } else return ''
+                  })}
                 </Dropdown.Menu>
               </Dropdown>
             }

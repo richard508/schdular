@@ -62,3 +62,21 @@ export const cancelAppt = (pid, appt) => {
     })
   }
 }
+
+export const updateTime = (oldAppt, newAppt) => {
+  return (dispatch) => {
+    axios.patch(`/api/appointments/${oldAppt._id}`, oldAppt).then(resOld => {
+      axios.patch(`/api/appointments/${newAppt._id}`, newAppt).then(resNew => {
+        const oldData = resOld.data
+        const newData = resNew.data
+        dispatch({type: 'UPDATE_TIME', oldData, newData})
+      })
+      .catch(error => {
+        dispatch({type: 'ERROR_APPT', error})
+      })
+    })
+    .catch(error => {
+      dispatch({type: 'ERROR_APPT', error})
+    })
+  }
+}

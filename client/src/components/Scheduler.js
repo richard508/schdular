@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import {getAppt, updateAppt, updatePerson, cancelAppt} from "../store/actions/scheduleActions"
+import {getAppt, updateAppt, updatePerson, cancelAppt, updateTime} from "../store/actions/scheduleActions"
 import BootModal from './Modal'
 
 class Scheduler extends Component {
@@ -84,7 +84,25 @@ class Scheduler extends Component {
 
   timeChange = (e, time) => {
     e.preventDefault()
-    console.log(time)
+    const id = this.state.id
+    const oldAppt = this.props.appointments.find(appt => {
+      return appt._id === id
+    })
+    const oldData = {
+      ...oldAppt,
+      person: null,
+      isAvailable: true
+    }
+    const newData = {
+      ...time,
+      person: this.state.currentAppt,
+      isAvailable:false
+    }
+    this.props.updateTime(oldData, newData)
+    this.setState({
+      openModal: false,
+      id:''
+    })
   }
 
   render() {
@@ -128,7 +146,8 @@ const mapDispatchToProps = dispatch => {
     getAppt: () => dispatch(getAppt()),
     updateAppt: (id, payload) => dispatch(updateAppt(id, payload)),
     updatePerson: (id, payload) => dispatch(updatePerson(id, payload)),
-    cancelAppt: (pid, appt) => (dispatch(cancelAppt(pid, appt)))
+    cancelAppt: (pid, appt) => (dispatch(cancelAppt(pid, appt))),
+    updateTime: (oldData, newData) => (dispatch(updateTime(oldData, newData)))
   }
 }
 

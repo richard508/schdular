@@ -28,6 +28,19 @@ function cancelAppt (appointments, data) {
     return cancelAppt
 }
 
+function updateTime (appointments, oldData, newData) {
+  const updateTime = appointments.map(appointment => {
+    if(appointment._id === oldData._id){
+      return oldData
+    } else if(appointment._id === newData._id){
+      return newData
+    } else {
+      return appointment
+    }
+  })
+  return updateTime
+}
+
 const scheduleReducer = (state = initState, action) =>{
   switch(action.type){
     case 'GET_APPT':
@@ -45,10 +58,15 @@ const scheduleReducer = (state = initState, action) =>{
         appointments: [...updatePerson(state.appointments, action.data)]
       }
     case 'CANCEL_APPT':
-    return {
-      ...state,
-      appointments: [...cancelAppt(state.appointments, action.data)]
-    }
+      return {
+        ...state,
+        appointments: [...cancelAppt(state.appointments, action.data)]
+      }
+    case 'UPDATE_TIME':
+      return {
+        ...state,
+        appointments: [...updateTime(state.appointments, action.oldData, action.newData)]
+      }
     case 'ERROR_APPT':
       console.log('Error getting appointments')
       return state
